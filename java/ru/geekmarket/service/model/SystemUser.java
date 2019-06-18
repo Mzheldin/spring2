@@ -1,10 +1,12 @@
-package ru.geekmarket.service.model;
+package com.geekbrains.spring2.service.model;
 
-import ru.geekmarket.persist.model.Role;
-import ru.geekmarket.persist.model.User;
+import com.geekbrains.spring2.persist.model.Role;
+import com.geekbrains.spring2.persist.model.User;
+import lombok.Data;
 
 import java.util.Set;
 
+@Data
 public class SystemUser {
 
     private Long id;
@@ -42,61 +44,5 @@ public class SystemUser {
         this.lastName = user.getLastName();
         this.email = user.getEmail();
         this.roles = user.getRoles();
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public Set<Role> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
     }
 }

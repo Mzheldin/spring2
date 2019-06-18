@@ -1,4 +1,4 @@
-package ru.geekmarket.service;
+package com.geekbrains.spring2.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -6,16 +6,18 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import ru.geekmarket.persist.model.Role;
-import ru.geekmarket.persist.model.User;
-import ru.geekmarket.persist.repo.RoleRepository;
-import ru.geekmarket.persist.repo.UserRepository;
-import ru.geekmarket.service.model.SystemUser;
+import com.geekbrains.spring2.persist.model.Role;
+import com.geekbrains.spring2.persist.model.User;
+import com.geekbrains.spring2.persist.repo.RoleRepository;
+import com.geekbrains.spring2.persist.repo.UserRepository;
+import com.geekbrains.spring2.service.model.SystemUser;
+import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.*;
 import java.util.stream.Collectors;
 
+@Service
 public class UserServiceJpaImpl implements UserService {
 
     private UserRepository userRepository;
@@ -77,6 +79,16 @@ public class UserServiceJpaImpl implements UserService {
         }
         return new org.springframework.security.core.userdetails.User(user.getUserName(), user.getPassword(),
                 mapRolesToAuthorities(user.getRoles()));
+    }
+
+    @Override
+    @Transactional
+    public boolean deleteUser(Long id){
+        if (userRepository.findById(id).isPresent()){
+            userRepository.deleteById(id);
+            return true;
+        }
+        return false;
     }
 
     private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles) {

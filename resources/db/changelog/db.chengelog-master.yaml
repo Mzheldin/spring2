@@ -1,0 +1,246 @@
+databaseChangelog:
+  - preConditions:
+      - runningAs:
+        username: root
+        password: root
+
+  - chengeSet:
+      id: 1
+      author: mzheldin
+      comment: "Create users table"
+      changes:
+        - createTable:
+            tableName: users
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: username
+                  type: varchar(50)
+                  constraints:
+                    unique: true
+                    nullable: false
+              - column:
+                  name: password
+                  type: varchar(512)
+                  constraints:
+                    unique: true
+                    nullable: false
+              - column:
+                  name: first_name
+                  type: varchar(50)
+              - column:
+                  name: last_name
+                  type: varchar(50)
+              - column:
+                  name: email
+                  type: varchar(50)
+
+  - changeSet:
+      id: 2
+      author: mzheldin
+      comment: "Create roles table"
+      changes:
+        - createTable:
+            tableName: roles
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(50)
+                  constraints:
+                    unique: true
+                    nullable: false
+
+  - changeSet:
+      id: 3
+      author: mzheldin
+      comment: "Create users_roles table"
+      changes:
+        - createTable:
+            tableName: users_roles
+            columns:
+              - column:
+                  name: user_id
+                  type: int
+                  constraints:
+                    foreignKeyName: fk_user_id
+                    references: users(id)
+                    nullable: false
+              - column:
+                  name: role_id
+                  type: int
+                  constraints:
+                    foreignKeyName: fk_role_id
+                    references: roles(id)
+                    nullable: false
+
+  - changeSet:
+      id: 4
+      author: mzheldin
+      comment: "Create categories table"
+      changes:
+        - createTable:
+            tableName: categories
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(50)
+                  constraints:
+                    unique: true
+                    nullable: false
+
+  - changeSet:
+      id: 5
+      author: mzheldin
+      comment: "Create products table"
+      changes:
+        - createTable:
+            tableName: products
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                    constraints:
+                      primaryKey: true
+                      nullable: false
+              - column:
+                  name: category_id
+                  type: int
+                  constraints:
+                    foreignKeyName: fk_category_id
+                    references: categories(id)
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(100)
+                  constraints:
+                    unique: true
+                    nullable: false
+              - column:
+                  name: image
+                  type: varchar(255)
+              - column:
+                  name: short_description
+                  type: varchar(1000)
+              - column:
+                  name: description
+                  type: varchar(5000)
+              - column:
+                  name: price
+                  type: decimal(8,2)
+
+  - changeSet:
+      id: 6
+      author: mzheldin
+      comment: "Create orders_statuses table"
+      changes:
+        - createTable:
+            tableName: orders_statuses
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(50)
+                  constraints:
+                    unique: true
+                    nullable: false
+
+  - changeSet:
+      id: 7
+      author: mzheldin
+      comment: "Create orders table"
+      changes:
+        - createTable:
+            tableName: orders
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: user_id
+                  type: int
+                  constraints:
+                    foreignKeyName: fk_user_order_id
+                    references: users(id)
+                    nullable: false
+              - column:
+                  name: status_id
+                  type: int
+                  constraints:
+                    foreignKeyName: fk_status_id
+                    references: roles(id)
+                    nullable: false
+              - column:
+                  name: create_at
+                  type: datetime
+                  constraints:
+                    nullable: false
+
+  - changeSet:
+      id: 8
+      author: mzheldin
+      comment: "Create orders_item table"
+      changes:
+        - createTable:
+            tableName: orders_item
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: product_id
+                  type: int
+                  constraints:
+                    foreignKeyName: fk_product_id
+                    references: products(id)
+                    nullable: false
+              - column:
+                  name: order_id
+                  type: int
+                  constraints:
+                    foreignKeyName: fk_order_id
+                    references: orders(id)
+                    nullable: false
+              - column:
+                  name: quantity
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: total_price
+                  type: decimal(8,2)
+

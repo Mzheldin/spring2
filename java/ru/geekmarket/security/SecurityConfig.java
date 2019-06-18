@@ -1,4 +1,4 @@
-package ru.geekmarket.security;
+package com.geekbrains.spring2.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -10,10 +10,10 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import ru.geekmarket.persist.repo.RoleRepository;
-import ru.geekmarket.persist.repo.UserRepository;
-import ru.geekmarket.service.UserService;
-import ru.geekmarket.service.UserServiceJpaImpl;
+import com.geekbrains.spring2.persist.repo.RoleRepository;
+import com.geekbrains.spring2.persist.repo.UserRepository;
+import com.geekbrains.spring2.service.UserService;
+import com.geekbrains.spring2.service.UserServiceJpaImpl;
 
 @Configuration
 @EnableWebSecurity
