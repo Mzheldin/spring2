@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
@@ -12,12 +12,12 @@
     <div th:replace="admin/fragments/sidebar :: sidebar"></div>
 
     <div class="content p-4">
-        <h2 class="mb-4">User list</h2>
+        <h2 class="mb-4">Category list</h2>
 
         <div class="card mb-4">
 
             <div class="card-body">
-                <form class="form-group" th:action="@{/admin/user/create}">
+                <form class="form-group" th:action="@{/admin/category/create}">
                     <button type="submit" class="btn btn-primary">Create new</button>
                 </form>
 
@@ -25,23 +25,17 @@
                     <thead>
                     <tr>
                         <th>Id</th>
-                        <th>Username</th>
-                        <th>First name</th>
-                        <th>Last name</th>
-                        <th>Email</th>
+                        <th>Title</th>
                         <th class="actions">Actions</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="usr : ${users}">
-                        <td th:text="${usr.id}"></td>
-                        <td th:text="${usr.userName}">Admin</td>
-                        <td th:text="${usr.firstName}"></td>
-                        <td th:text="${usr.lastName}"></td>
-                        <td th:text="${usr.email}"></td>
+                    <tr th:each="categ : ${categories}">
+                        <td th:text="${categ.id}"></td>
+                        <td th:text="${categ.name}"></td>
                         <td>
-                            <a th:href="@{user/{id}/edit(id=${usr.id})}" class="btn btn-icon btn-pill btn-primary" data-toggle="tooltip" title="Edit"><i class="fa fa-fw fa-edit"></i></a>
-                            <a th:href="@{user/{id}/delete(id=${usr.id})}" class="btn btn-icon btn-pill btn-danger" data-toggle="tooltip" title="Delete"><i class="fa fa-fw fa-trash"></i></a>
+                            <a th:href="@{category/{id}/edit(id=${categ.id})}" class="btn btn-icon btn-pill btn-primary" data-toggle="tooltip" title="Edit"><i class="fa fa-fw fa-edit"></i></a>
+                            <a th:href="@{category/{id}/delete(id=${categ.id})}" class="btn btn-icon btn-pill btn-danger" data-toggle="tooltip" title="Delete"><i class="fa fa-fw fa-trash"></i></a>
                         </td>
                     </tr>
                     </tbody>
