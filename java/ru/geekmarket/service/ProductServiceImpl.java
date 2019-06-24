@@ -32,7 +32,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     @Transactional
     public boolean save(Product product) {
-        if (product.getCategory() != null && product.getName() != null){
+        if (product.getCategories() != null && product.getName() != null){
             if (product.getId() == null) product.setId(0L);
             productRepository.save(product);
             return true;

@@ -5,10 +5,11 @@ import lombok.Data;
 import javax.persistence.*;
 import java.util.List;
 
-@Entity
-@Table(name = "categories")
 @Data
-public class Category {
+@Entity
+@Table(name = "brands")
+public class Brand {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -17,9 +18,9 @@ public class Category {
     @Column(name = "name", unique = true, nullable = false)
     private String name;
 
-    @ManyToMany(mappedBy = "categories")
+    @OneToMany(
+            mappedBy = "brand",
+            orphanRemoval = true,
+            cascade = CascadeType.ALL)
     private List<Product> products;
-
-    public Category() {
-    }
 }

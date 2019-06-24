@@ -1,6 +1,7 @@
 package com.geekbrains.spring2.controller.admin;
 
 import com.geekbrains.spring2.persist.model.Product;
+import com.geekbrains.spring2.persist.repo.BrandRepository;
 import com.geekbrains.spring2.service.CategoryService;
 import com.geekbrains.spring2.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,10 +23,13 @@ public class AdminProductController {
 
     private final CategoryService categoryService;
 
+    private final BrandRepository brandRepository;
+
     @Autowired
-    public AdminProductController(ProductService productService, CategoryService categoryService) {
+    public AdminProductController(ProductService productService, CategoryService categoryService, BrandRepository brandRepository) {
         this.productService = productService;
         this.categoryService = categoryService;
+        this.brandRepository = brandRepository;
     }
 
     @GetMapping("/admin/product")
@@ -41,6 +45,7 @@ public class AdminProductController {
         model.addAttribute("activePage", "Products");
         model.addAttribute("product", productService.findById(id));
         model.addAttribute("categories", categoryService.findAll());
+        model.addAttribute("brands", brandRepository.findAll());
         return "admin/product_form";
     }
 
@@ -56,6 +61,7 @@ public class AdminProductController {
         model.addAttribute("activePage", "Products");
         model.addAttribute("product", new Product());
         model.addAttribute("categories", categoryService.findAll());
+        model.addAttribute("brands", brandRepository.findAll());
         return "admin/product_form";
     }
 

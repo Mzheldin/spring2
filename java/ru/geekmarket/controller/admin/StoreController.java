@@ -23,7 +23,7 @@ public class StoreController {
     public String showStore(Model model){
         model.addAttribute("products", productService.findAll());
         model.addAttribute("categories", categoryService.findAll());
-        return "/store";
+        return "store";
     }
 
 
