@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
 	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-	<head th:replace="fragments/header :: head"></head>
+	<head th:replace="fragments/header.html :: head"></head>
 	<body>
 		<!-- HEADER -->
-		<header th:replace="fragments/header :: header"></header>
+		<header th:replace="fragments/header.html :: header"></header>
 		<!-- /HEADER -->
 
 		<!-- NAVIGATION -->
-		<nav th:replace="fragments/header :: navigation" id="navigation"></nav>
+		<nav th:replace="fragments/header.html :: navigation" id="navigation"></nav>
 		<!-- /NAVIGATION -->
 
 		<!-- BREADCRUMB -->
@@ -45,20 +45,15 @@
 		<!-- /SECTION -->
 
 		<!-- NEWSLETTER -->
-		<div th:replace="fragments/footer :: newsletter" id="newsletter" class="section"></div>
+		<div th:replace="fragments/footer.html :: newsletter" id="newsletter" class="section"></div>
 		<!-- /NEWSLETTER -->
 
 		<!-- FOOTER -->
-		<footer th:replace="fragments/footer :: footer" id="footer"></footer>
+		<footer th:replace="fragments/footer.html :: footer" id="footer"></footer>
 		<!-- /FOOTER -->
 
 		<!-- jQuery Plugins -->
-		<script src="js/jquery.min.js"></script>
-		<script src="js/bootstrap.min.js"></script>
-		<script src="js/slick.min.js"></script>
-		<script src="js/nouislider.min.js"></script>
-		<script src="js/jquery.zoom.min.js"></script>
-		<script src="js/main.js"></script>
+		<script th:replace="fragments/footer.html :: scripts"></script>
 
 	</body>
 </html>
