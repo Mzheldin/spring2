@@ -33,6 +33,12 @@
         </div>
         <div class="add-to-cart">
             <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+            <form th:action="@{/cart/update}" method="post">
+                <input type="hidden" th:value="${product.id}" name="productId" id="productId">
+                <input type="hidden" value="1" name="qty" id="qty">
+                <input type="hidden" th:value="@{__${#httpServletRequest.requestURI}__}" name="pageUrl" id="pageUrl">
+                <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+            </form>
         </div>
     </div>
     <!-- /product -->
