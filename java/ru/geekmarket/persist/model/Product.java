@@ -7,6 +7,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Data
 @Entity
@@ -43,4 +44,10 @@ public class Product {
     public Product() {
     }
 
+    public String getCategoriesAsString() {
+        return getCategories()
+                .stream()
+                .map(Category::getName)
+                .collect(Collectors.joining(", "));
+    }
 }
