@@ -25,6 +25,4 @@ public class StoreController {
         model.addAttribute("categories", categoryService.findAll());
         return "store";
     }
-
-
 }

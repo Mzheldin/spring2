@@ -64,11 +64,8 @@ public class AdminUserController {
     @PostMapping("/admin/user")
     public String adminInsertUser(@Valid SystemUser user, Model model, BindingResult bindingResult) {
         model.addAttribute("activePage", "Users");
-
-        if (bindingResult.hasErrors()) {
+        if (bindingResult.hasErrors())
             return "admin/user_form";
-        }
-
         userService.save(user);
         return "redirect:/admin/user";
     }
