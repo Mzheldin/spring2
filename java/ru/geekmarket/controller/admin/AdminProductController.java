@@ -68,11 +68,8 @@ public class AdminProductController {
     @PostMapping("/admin/product")
     public String adminInsertProduct(@Valid Product product, Model model, BindingResult bindingResult) {
         model.addAttribute("activePage", "Products");
-
-        if (bindingResult.hasErrors()) {
+        if (bindingResult.hasErrors())
             return "admin/product_form";
-        }
-
         productService.save(product);
         return "redirect:/admin/product";
     }

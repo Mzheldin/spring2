@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Optional;
 
 @Controller
 public class MainController {
@@ -56,9 +57,8 @@ public class MainController {
 
     @PostMapping("/cart/update")
     public String updateCart(CartItem cartItem, HttpServletRequest httpServletRequest) {
-        Product product = productService.findById(cartItem.getProductId());
-        if (product != null)
-            cartService.addAmount(product, cartItem.getAmount());
+        Optional<Product> product = Optional.ofNullable(productService.findById(cartItem.getProductId()));
+        product.ifPresent(value -> cartService.addAmount(value, cartItem.getAmount()));
         return "redirect:" + cartItem.getPageUrl();
     }
 }

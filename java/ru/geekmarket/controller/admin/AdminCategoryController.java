@@ -56,11 +56,8 @@ public class AdminCategoryController {
     @PostMapping("/admin/category")
     public String adminInsertProduct(@Valid Category category, Model model, BindingResult bindingResult) {
         model.addAttribute("activePage", "Categories");
-
-        if (bindingResult.hasErrors()) {
+        if (bindingResult.hasErrors())
             return "admin/category_form";
-        }
-
         categoryService.save(category);
         return "redirect:/admin/category";
     }

@@ -4,10 +4,11 @@ import com.geekbrains.spring2.persist.model.Role;
 import com.geekbrains.spring2.persist.model.User;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.Set;
 
 @Data
-public class SystemUser {
+public class SystemUser implements Serializable {
 
     private Long id;
 
@@ -44,5 +45,13 @@ public class SystemUser {
         this.lastName = user.getLastName();
         this.email = user.getEmail();
         this.roles = user.getRoles();
+    }
+
+    public SystemUser(String userName, String password, String firstName, String lastName, String email) {
+        this.userName = userName;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
     }
 }
