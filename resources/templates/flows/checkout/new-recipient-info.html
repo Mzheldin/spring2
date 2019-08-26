@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header.html :: head"></head>
+
+<body>
+<!-- HEADER -->
+<header th:replace="fragments/header.html :: header"></header>
+<!-- /HEADER -->
+
+<!-- NAVIGATION -->
+<nav th:replace="fragments/header.html :: navigation"></nav>
+<!-- /NAVIGATION -->
+
+<!-- BREADCRUMB -->
+<div id="breadcrumb" class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <div class="col-md-12">
+                <ul class="breadcrumb-tree">
+                    <li><a th:href="@{'~' + ${flowExecutionUrl} + '&_eventId_home'}">Home</a></li>
+                    <li><a th:href="@{'~' + ${flowExecutionUrl} + '&_eventId_checkCart'}">Back</a></li>
+                </ul>
+            </div>
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /BREADCRUMB -->
+<div>
+    <form class="login-form" th:object="${recepientInfo}" th:action="@{'~' + ${flowExecutionUrl} + '&_eventId_orderSuccess'}"
+          method="POST" enctype="multipart/form-data">
+        <div class="form-group">
+            <input class="input" type="text" th:field="*{firstName}" placeholder="Recepient first name">
+            <small class="form-text text-danger" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></small>
+        </div>
+        <div class="form-group">
+            <input class="input" type="password" th:field="*{lastName}" placeholder="Recepient last name">
+            <small class="form-text text-danger" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></small>
+        </div>
+        <div class="form-group">
+            <input class="input" type="password" th:field="*{address}" placeholder="Address">
+            <small class="form-text text-danger" th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></small>
+        </div>
+        <div class="form-group">
+            <label>Payment</label>
+            <select th:field="*{payment}">
+                <option th:each="payment : ${T(com.geekbrains.spring2.flow.checkout.Payment).values()}"
+                        th:value="${payment}"
+                        th:text="${payment}">
+                </option>
+            </select>
+        </div>
+        <div class="form-group">
+            <button class="primary-btn order-submit" type="submit">Next</button>
+        </div>
+    </form>
+</div>
+
+<!-- NEWSLETTER -->
+<div th:replace="fragments/footer.html :: newsletter"></div>
+<!-- /NEWSLETTER -->
+
+<!-- FOOTER -->
+<footer th:replace="fragments/footer.html :: footer"></footer>
+<!-- /FOOTER -->
+
+<!-- jQuery Plugins -->
+<script th:replace="fragments/footer.html :: scripts"></script>
+
+</body>
+</html>

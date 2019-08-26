@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header.html :: head"></head>
+
+<body>
+<!-- HEADER -->
+<header th:replace="fragments/header.html :: header"></header>
+<!-- /HEADER -->
+
+<!-- NAVIGATION -->
+<nav th:replace="fragments/header.html :: navigation"></nav>
+<!-- /NAVIGATION -->
+
+<!-- BREADCRUMB -->
+<div id="breadcrumb" class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <div class="col-md-12">
+                <ul class="breadcrumb-tree">
+                    <li><a th:href="@{'~' + ${flowExecutionUrl} + '&_eventId_home'}">Home</a></li>
+                </ul>
+            </div>
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /BREADCRUMB -->
+
+<div>
+    <h3>Product list</h3>
+    <table id="users" class="table table-hover" cellspacing="0" width="100%">
+        <thead>
+        <tr>
+            <th>Product name</th>
+            <th>Amount</th>
+            <th>Price</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="prod : ${products.entrySet()}">
+            <td th:text="${prod.getKey().name}"></td>
+            <td th:text="${prod.getValue()}"></td>
+            <td th:text="${prod.getKey().price * prod.getValue()}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <div th:text="cartFinal.totalSum">Total price</div>
+    <div>
+        <a th:href="@{'~' + ${flowExecutionUrl} + '&_eventId_submit'}">Next</a>
+    </div>
+</div>
+
+
+<!-- NEWSLETTER -->
+<div th:replace="fragments/footer.html :: newsletter"></div>
+<!-- /NEWSLETTER -->
+
+<!-- FOOTER -->
+<footer th:replace="fragments/footer.html :: footer"></footer>
+<!-- /FOOTER -->
+
+<!-- jQuery Plugins -->
+<script th:replace="fragments/footer.html :: scripts"></script>
+
+</body>
+</html>
